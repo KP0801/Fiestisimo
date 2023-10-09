@@ -1,0 +1,20 @@
+span{
+    font-size: 14px;
+    padding: 0px;
+    color: red;
+    display: none;
+    text-wrap:wrap;
+}
+input:invalid[focused="true"]{
+    border: 1px solid red;
+}
+
+input:invalid[focused="true"] ~ span{
+    display: block;
+}
+
+.formInput { 
+    display: flex !important;
+    flex-direction: column !important;
+    width: 280px !important;
+}
