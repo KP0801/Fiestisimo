@@ -28,7 +28,7 @@ exports.authenticateUser = async (req, res) => {
       const token = jwtUtils.generateAuthToken(payload, expiresIn);
 
       // Enviamos el token como respuesta
-      res.status(200).json({token});
+      res.status(200).json({ message: 'Autenticación exitosa', token });
     } catch (error) {
       console.error('Error de autenticación:', error);
       res.status(500).json({ error: 'Error de autenticación' });
