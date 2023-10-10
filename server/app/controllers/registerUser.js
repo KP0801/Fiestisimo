@@ -30,7 +30,7 @@ exports.registerUser = async (req, res) => {
       email,
       phone,
       password: hashedPassword,
-      role: 'admin', 
+      role: 'cliente', 
     });
 
      // Correo electronico de confirmacion
@@ -57,4 +57,3 @@ exports.registerUser = async (req, res) => {
     res.status(500).json({ error: 'Error al registrar el usuario.' });
   }
 };
-
