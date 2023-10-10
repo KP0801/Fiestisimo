@@ -5,7 +5,7 @@ const sendMail = require('../../utils/sendMail');
 //! Controlador para registrar un nuevo usuario
 exports.registerUser = async (req, res) => {
   try {
-    // Datos del cuerpo de la solicitud
+    // Cuerpo de la solicitud
     const { name, email, phone, password } = req.body;
 
     // Verifica si el usuario existe mediante su correo
@@ -43,14 +43,15 @@ exports.registerUser = async (req, res) => {
 
     const emailParams = {
       email: newUser.email,
-      name: newUser.name, // Puedes pasar el nombre del usuario a la plantilla EJS
-      password: password, // Puedes pasar la contraseña del usuario a la plantilla EJS
+      name: newUser.name, 
+      password: password, 
       currentDate: currentDate,
     };
 
     await sendMail(email, emailOptions, 'registration', emailParams);
 
-    // Enviar una respuesta exitosa
+    console.log(token)
+    // Envia una respuesta exitosa
     res.status(201).json({ message: 'Usuario creado exitosamente', user: newUser });
   } catch (error) {
     console.error('Error al registrar el usuario:', error);
