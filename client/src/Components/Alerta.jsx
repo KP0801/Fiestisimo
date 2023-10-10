@@ -1,4 +1,4 @@
-import Swal from "sweetalert";
+import Swal from "sweetalert2";
 import { useEffect } from "react";
 
 const Alerta = ({ alerta }) => {
