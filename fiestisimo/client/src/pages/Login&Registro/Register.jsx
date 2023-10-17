@@ -1,7 +1,90 @@
 import { Link } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
+import { useState } from "react";
+import Alerta from "../../Components/Alerta";
 
 const Register = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [password, setPassword] = useState("");
+  const [repitepassword, setRepitepassword] = useState("");
+  const [alerta, setAlerta] = useState({});
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let regexNombbre = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
+    let regexEmail =
+      /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+    let regexTel = /^\d{8}$/;
+    let regexContra = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
+
+    if ([name, email, telefono, password, repitepassword].includes("")) {
+      setAlerta({ msg: "Todos los campos son obligatoios", error: true });
+      setTimeout(() => {
+        setAlerta({});
+      }, 4000);
+      return;
+    }
+
+    if (!regexNombbre.test(name.trim())) {
+      setAlerta({
+        msg: 'El campo "nombre docente" solo acepta letras y un espacio en blanco por cada nombre',
+        error: true,
+      });
+      setTimeout(() => {
+        setAlerta({});
+      }, 4000);
+      return;
+    }
+
+    if (!regexEmail.test(email.trim())) {
+      setAlerta({
+        msg: 'El campo "correo docente" es inválido, ejem: alguien@algunlugar.es',
+        error: true,
+      });
+      setTimeout(() => {
+        setAlerta({});
+      }, 4000);
+      return;
+    }
+
+    if (!regexTel.test(telefono.trim())) {
+      setAlerta({
+        msg: 'El campo "telefono" es inválido, solo acepta un maximo de 8 numeros',
+        error: true,
+      });
+      setTimeout(() => {
+        setAlerta({});
+      }, 4000);
+      return;
+    }
+
+    if (!regexContra.test(password.trim())) {
+      setAlerta({
+        msg: "La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula.",
+        error: true,
+      });
+      setTimeout(() => {
+        setAlerta({});
+      }, 4000);
+      return;
+    }
+
+    if (password != repitepassword) {
+      setAlerta({
+        msg: "Las contraseñas no coinciden",
+        error: true,
+      });
+      setTimeout(() => {
+        setAlerta({});
+      }, 4000);
+      return;
+    }
+  };
+
+  const { msg } = alerta;
+
   return (
     <>
       <Link to="/" className="flex items-center gap-4 mt-10 mx-20">
@@ -14,8 +97,10 @@ const Register = () => {
           <span className="text-slate-700">Pasteleria Fiestisimo</span>
         </h1>
         <form
-          /* onSubmit={handleSubmit} */ className="my-20 bg-white p-10 shadow rounded-lg"
+          onSubmit={handleSubmit}
+          className="my-20 bg-white p-10 shadow rounded-lg"
         >
+          {msg && <Alerta alerta={alerta} />}
           <div className="my-5">
             <label
               className="uppercase text-gray-800 block text-xl font-bold"
@@ -24,7 +109,9 @@ const Register = () => {
               Nombre Completo
             </label>
             <input
-              /* onChange={e => setNombre(e.target.value)} value={nombre} */ type="text"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              type="text"
               placeholder="Escribe tu Nombre"
               className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
               id="nombre"
@@ -38,7 +125,9 @@ const Register = () => {
               Correo Electronico
             </label>
             <input
-              /* value={email} onChange={e => setEmail(e.target.value)} */ type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
               placeholder="Escribe tu correo"
               className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
               id="email"
@@ -49,10 +138,12 @@ const Register = () => {
               className="uppercase text-gray-800 block text-xl font-bold"
               htmlFor="telefono"
             >
-              Tel
+              Telefono
             </label>
             <input
-              /* value={email} onChange={e => setEmail(e.target.value)} */ type="text"
+              value={telefono}
+              onChange={(e) => setTelefono(e.target.value)}
+              type="text"
               placeholder="Escribe tu telefono"
               className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
               id="telefono"
@@ -66,7 +157,9 @@ const Register = () => {
               Contraseña
             </label>
             <input
-              /* value={password} onChange={e => setPassword(e.target.value)} */ type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
               placeholder="Escribe tu Contraseña"
               className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
               id="password"
@@ -81,14 +174,14 @@ const Register = () => {
               Repetir Contraseña
             </label>
             <input
-              /* value={password2} onChange={e => setPassword2(e.target.value)} */ type="password"
+              value={repitepassword}
+              onChange={(e) => setRepitepassword(e.target.value)}
+              type="password"
               placeholder="Repite tu Contraseña"
               className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
               id="password2"
             />
           </div>
-          
-         
           <input
             type="submit"
             value="Crear Cuenta"

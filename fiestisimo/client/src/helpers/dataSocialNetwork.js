@@ -16,11 +16,5 @@ export const dataSocialNetwork=[
         name:"TikTok",
         icon:"tiktok",
         link:"https://www.instagram.com/accounts/login/"
-    },
-    {
-        id:4,
-        name:"YouTube",
-        icon:"youtube",
-        link:"https://www.instagram.com/accounts/login/"
     }
 ]

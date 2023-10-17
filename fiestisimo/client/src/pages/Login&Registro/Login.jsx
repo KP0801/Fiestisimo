@@ -11,6 +11,9 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let regexEmail =
+      /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+    let regexContra = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
 
     if ([email, password].includes("")) {
       setAlerta({
@@ -20,6 +23,28 @@ const Login = () => {
       setTimeout(() => {
         setAlerta({});
       }, 5000);
+      return;
+    }
+
+    if (!regexEmail.test(email.trim())) {
+      setAlerta({
+        msg: 'El campo "correo docente" es inválido, ejem: alguien@algunlugar.es',
+        error: true,
+      });
+      setTimeout(() => {
+        setAlerta({});
+      }, 4000);
+      return;
+    }
+
+    if (!regexContra.test(password.trim())) {
+      setAlerta({
+        msg: "La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula.",
+        error: true,
+      });
+      setTimeout(() => {
+        setAlerta({});
+      }, 4000);
       return;
     }
 
