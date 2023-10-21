@@ -1,17 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 import { useState } from "react";
 import Alerta from "../../Components/Alerta";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [telefono, setTelefono] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [repitepassword, setRepitepassword] = useState("");
   const [alerta, setAlerta] = useState({});
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let regexNombbre = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
     let regexEmail =
@@ -19,7 +23,7 @@ const Register = () => {
     let regexTel = /^\d{8}$/;
     let regexContra = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
 
-    if ([name, email, telefono, password, repitepassword].includes("")) {
+    if ([name, email, phone, password, repitepassword].includes("")) {
       setAlerta({ msg: "Todos los campos son obligatoios", error: true });
       setTimeout(() => {
         setAlerta({});
@@ -49,7 +53,7 @@ const Register = () => {
       return;
     }
 
-    if (!regexTel.test(telefono.trim())) {
+    if (!regexTel.test(phone.trim())) {
       setAlerta({
         msg: 'El campo "telefono" es inválido, solo acepta un maximo de 8 numeros',
         error: true,
@@ -81,6 +85,37 @@ const Register = () => {
       }, 4000);
       return;
     }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/fiestisimo/registerUser/",
+        {
+          name,
+          email,
+          phone,
+          password,
+        }
+      );
+      console.log("Respuesta Usuario", response);
+      toast.success("Usuario Creado Exitosamente", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setName("");
+      setEmail("");
+      setPhone("");
+      setPassword("");
+      setTimeout(() => {
+        navigate("/login");
+      }, 5000);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const { msg } = alerta;
@@ -101,6 +136,7 @@ const Register = () => {
           className="my-20 bg-white p-10 shadow rounded-lg"
         >
           {msg && <Alerta alerta={alerta} />}
+          <ToastContainer position="top-right" />
           <div className="my-5">
             <label
               className="uppercase text-gray-800 block text-xl font-bold"
@@ -141,8 +177,8 @@ const Register = () => {
               Telefono
             </label>
             <input
-              value={telefono}
-              onChange={(e) => setTelefono(e.target.value)}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               type="text"
               placeholder="Escribe tu telefono"
               className="w-full mt-3 p-3 border rounded-xl bg-gray-50"

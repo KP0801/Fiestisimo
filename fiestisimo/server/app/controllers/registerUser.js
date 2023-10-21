@@ -7,6 +7,7 @@ exports.registerUser = async (req, res) => {
   try {
     // Cuerpo de la solicitud
     const { name, email, phone, password } = req.body;
+    console.log(req.body);
 
     // Verifica si el usuario existe mediante su correo
     const existingUser = await User.findOne({ where: { email } });
@@ -50,7 +51,6 @@ exports.registerUser = async (req, res) => {
 
     await sendMail(email, emailOptions, 'registration', emailParams);
 
-    console.log(token)
     // Envia una respuesta exitosa
     res.status(201).json({ message: 'Usuario creado exitosamente', user: newUser });
   } catch (error) {
