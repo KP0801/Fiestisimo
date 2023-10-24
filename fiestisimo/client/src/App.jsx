@@ -7,6 +7,7 @@ import AuthLayouts from "./layouts/AuthLayouts";
 import PrincipalPage from "./pages/PrincipalPage";
 import RutaProtegida from "./layouts/RutaProtegida";
 import PaginaInicio from "./pages/PaginaInicio";
+import Productos from "./pages/Catalog/Productos";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<AuthLayouts />}>
           <Route index element={<PrincipalPage />} />
+          <Route path="Productos" element={<Productos />} />
         </Route>
         <Route path="quienes-somos" element={<Description />} />
         <Route path="login" element={<Login />} />
@@ -21,6 +23,7 @@ const App = () => {
         <Route path="recover-password" element={<RecoverPassword />} />
         <Route path="/Inicio" element={<RutaProtegida />}>
           <Route index element={<PaginaInicio />} />
+         
         </Route>
       </Routes>
     </BrowserRouter>
