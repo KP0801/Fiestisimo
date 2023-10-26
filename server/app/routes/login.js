@@ -1,11 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const {authenticateUser} = require('../middlewares/authUsers.js');
+const {authenticateUser} = require('../controllers/authUser');
 
 // Autenticación de usuarios
-router.post('/', authenticateUser, (req, res) => {
-    const token = req.token;
-    res.status(200).json({ message: 'Autenticación exitosa', token });
-  });
+router.post('/', authenticateUser);
   
 module.exports = router;
