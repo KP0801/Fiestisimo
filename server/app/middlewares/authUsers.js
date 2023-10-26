@@ -22,8 +22,12 @@ exports.authenticateUser = async (req, res) => {
         return res.status(401).json({ error: 'Credenciales incorrectas' });
       }
   
-      // Generacion del token
-      const payload = { userId: user.id, email: user.email };
+      // Generacion del token con información del usuario
+      const payload = {
+        userId: user.id,
+        email: user.email,
+        role: user.role, 
+      };
       const expiresIn = '1h'; // 1 hora de expiración
       const token = jwtUtils.generateAuthToken(payload, expiresIn);
 
