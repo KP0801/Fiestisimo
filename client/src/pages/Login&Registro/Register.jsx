@@ -33,7 +33,7 @@ const Register = () => {
 
     if (!regexNombbre.test(name.trim())) {
       setAlerta({
-        msg: 'El campo "nombre docente" solo acepta letras y un espacio en blanco por cada nombre',
+        msg: 'El campo "nombre usuario" solo acepta letras y un espacio en blanco por cada nombre',
         error: true,
       });
       setTimeout(() => {
@@ -44,7 +44,7 @@ const Register = () => {
 
     if (!regexEmail.test(email.trim())) {
       setAlerta({
-        msg: 'El campo "correo docente" es inválido, ejem: alguien@algunlugar.es',
+        msg: 'El campo "correo usuario" es inválido, ejem: alguien@algunlugar.es',
         error: true,
       });
       setTimeout(() => {
