@@ -110,6 +110,7 @@ const Register = () => {
       setEmail("");
       setPhone("");
       setPassword("");
+      setRepitepassword("");
       setTimeout(() => {
         navigate("/login");
       }, 5000);

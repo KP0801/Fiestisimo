@@ -13,14 +13,14 @@ exports.authenticateUser = async (req, res) => {
   
       // Mensaje de error
       if (!user) {
-        return res.status(401).json({ error: 'Credenciales incorrectas' });
+        return res.status(500).json({ error: 'Credenciales incorrectas' });
       }
   
       // Compara la contraseña 
       const isPasswordValid = await bcrypt.compare(password, user.password);
   
       if (!isPasswordValid) {
-        return res.status(401).json({ error: 'Credenciales incorrectas' });
+        return res.status(500).json({ error: 'Credenciales incorrectas' });
       }
   
       // Generacion del token con información del usuario
@@ -67,6 +67,7 @@ exports.authenticateUser = async (req, res) => {
   
       // Devuelve la información del perfil del usuario
       res.status(200).json({
+        id:user.id_user,
         name: user.name,
         email: user.email,
         phone: user.phone,

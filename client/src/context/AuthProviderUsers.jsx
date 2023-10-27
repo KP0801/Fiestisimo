@@ -2,18 +2,18 @@ import axios from "axios";
 import { useState, useEffect, createContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-const AuthContext = createContext();
+const AuthContextUsers = createContext();
 
-const AuthProvider = ({ children }) => {
-  const [authAdm, setAuthAdm] = useState({});
-  const [cargando, setCargando] = useState(true);
+const AuthProviderUsers = ({ children }) => {
+  const [authUsers, setAuthUsers] = useState({});
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const autenticarAdmnin = async () => {
+    const autenticarUsers = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
-        setCargando(false);
+        setLoading(false);
         return;
       }
 
@@ -30,29 +30,29 @@ const AuthProvider = ({ children }) => {
           config
         );
         console.log("DATOS USUARIO", data);
-        setAuthAdm(data);
-        navigate("/InicioAdm");
+        setAuthUsers(data);
+        navigate("/InicioUsers");
       } catch (error) {
         console.log(error);
       }
-      setCargando(false);
+      setLoading(false);
     };
-    autenticarAdmnin();
-  }, [authAdm.role === "admin"]);
+    autenticarUsers();
+  }, [authUsers.role === "cliente"]);
 
   return (
-    <AuthContext.Provider
+    <AuthContextUsers.Provider
       value={{
-        setAuthAdm,
-        authAdm,
-        cargando,
+        authUsers,
+        setAuthUsers,
+        loading,
       }}
     >
       {children}
-    </AuthContext.Provider>
+    </AuthContextUsers.Provider>
   );
 };
 
-export { AuthProvider };
+export { AuthProviderUsers };
 
-export default AuthContext;
+export default AuthContextUsers;

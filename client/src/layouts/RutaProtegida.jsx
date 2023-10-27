@@ -1,23 +1,29 @@
 import Header from "../Components/Header";
 import SideBar from "../Components/SideBar";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import Spinner from "../Components/Spinner";
 
 const RutaProtegida = () => {
+  const { authAdm, cargando } = useAuth();
+  if (cargando) return <Spinner />;
   return (
     <>
-      {/* {auth._id ? ( */}
-      <div className="bg-gray-100">
-        <Header />
-        <div className="md:flex md:min-h-screen">
-          <SideBar />
+      {authAdm.role === "admin" ? (
+        <div className="bg-gray-100">
+          <Header />
+          <div className="md:flex md:min-h-screen">
+            <SideBar />
 
-          <main className="flex-1 p-10">
-            {/* flex-1 hace que tome el resto del contenido de la pantalla */}
-            <Outlet />
-          </main>
+            <main className="flex-1 p-10">
+              {/* flex-1 hace que tome el resto del contenido de la pantalla */}
+              <Outlet />
+            </main>
+          </div>
         </div>
-      </div>
-      {/* ) : <Navigate to="/"/> } */}
+      ) : (
+        <Navigate to="/login" />
+      )}
     </>
   );
 };

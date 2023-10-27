@@ -40,7 +40,7 @@ User.sync({ force: false })
     console.log("Tabla usuarios sincronizada");
   })
   .catch((error) => {
-    console.error("Error al sincronizar tabla de Asignaturas:", error);
+    console.error("Error al sincronizar tabla de usuarios:", error);
 });
 
 module.exports = User;

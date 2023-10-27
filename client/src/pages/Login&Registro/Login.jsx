@@ -3,11 +3,15 @@ import { AiFillHome } from "react-icons/ai";
 import { useState } from "react";
 import axios from "axios";
 import Alerta from "../../Components/Alerta";
+import useAuth from "../../hooks/useAuth";
+import useAuthUsers from "../../hooks/useAuthUsers";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alerta, setAlerta] = useState({});
+  const { setAuthAdm } = useAuth();
+  const { setAuthUsers } = useAuthUsers();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,18 +53,23 @@ const Login = () => {
     }
 
     try {
-      const { data } = await axios.post("/usuarios/login", { email, password });
+      const { data } = await axios.post(
+        "http://localhost:3000/fiestisimo/login/",
+        { email, password }
+      );
       setAlerta({});
       localStorage.setItem("token", data.token);
-      /* setAuth(data) */
+      setAuthAdm(data);
+      setAuthUsers(data);
+      setEmail("");
+      setPassword("");
+      window.location.reload();
     } catch (error) {
+      console.log(error);
       setAlerta({
-        msg: error.response.data.msg,
+        msg: error.response.data.error,
         error: true,
       });
-      setTimeout(() => {
-        setAlerta({});
-      }, 5000);
     }
   };
 
