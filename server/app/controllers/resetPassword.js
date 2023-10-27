@@ -1,77 +1,47 @@
+const User = require("../models/customers");
+const bcrypt = require("bcryptjs");
 const sendMail = require("../../utils/sendMail");
-const {generateAuthToken} = require("../../utils/authToken");
-const generateCode = require("../../utils/generateCode");
-const USER = require("../models/user");
 
-const getUsers = async (req, res, next) => {
-  try {
-    const users = await USER.findAll();
-    res.status(200).json(users);
-  } catch (error) {
-    next(err);
-  }
-};
-const restorePassword = async (req, res, next) => {
-  try {
-    console.log()
-    const {ACCOUNT_NUMBER,VERIFICATION_CODE} = req.token;
-    const { USER_PASSWORD} = req.body;
-    const user = await USER.findOne(
-        {where:{ ACCOUNT_NUMBER }}
+//! Controlador para actualizar la contraseña de un usuario
+exports.updatePassword = async (req, res) => {
+  const { email, newPassword } = req.body;
 
-    );
-    if(user.VERIFICATION_CODE == VERIFICATION_CODE){
-        user.USER_PASSWORD =  USER_PASSWORD;
-        await user.save();
-        res.status(200).json({message:"Contraseña cambiada correctamente"});
-    }else{
-        res.status(500).json({message:"No se ah podido reestablecer la contraseña "});
+  try {
+    // Busca al usuario
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      return res.status(404).json({ error: "Correo electrónico incorrecto" });
     }
 
-  } catch (err) {
-    next(err);
+    // Hashea la nueva contraseña
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Actualiza la contraseña del usuario
+    user.password = hashedPassword;
+    await user.save();
+
+    // Responde con un mensaje de éxito
+    res.status(200).json({ message: "Contraseña actualizada con éxito" });
+
+    // Correo electronico de confirmacion
+    const emailOptions = {
+      subject: "Contraseña actualizada con éxito", // Asunto
+    };
+
+    // Fecha y hora actual
+    const currentDate = new Date().toLocaleString();
+
+    const emailParams = {
+      email: user.email,
+      name: user.name,
+      password: req.body.newPassword,
+      currentDate: currentDate,
+    };
+
+    await sendMail(req.body.email, emailOptions, "resetPassword", emailParams);
+  } catch (error) {
+    console.error("Error al actualizar la contraseña:", error);
+    res.status(500).json({ error: "Error al actualizar la contraseña" });
   }
-};
-
-const sendRestoreEmail = async (req, res, next) => {
-    const { ACCOUNT_NUMBER } = req.params; 
-    const VERIFICATION_CODE = generateCode();
-    console.log(ACCOUNT_NUMBER,"  ",VERIFICATION_CODE);
-    try {
-
-        const user = await USER.findOne(
-            {where:{ ACCOUNT_NUMBER }}
-        );
-            
-        if (!user) {
-          return res.status(404).json({ message: "No existe un usuario con ese numero de cuenta" });
-        }
-
-        user.VERIFICATION_CODE = VERIFICATION_CODE;
-        await user.save();
-
-        const token = generateAuthToken({
-            ACCOUNT_NUMBER:user.ACCOUNT_NUMBER,
-            VERIFICATION_CODE
-        },"5m");
-
-        const options = {
-            subject:"Recuperacion de contraseña",
-        };
-        sendMail(user.EMAIL,options,'resetPassword',{token})
-        .then((response)=>{
-            res.status(200).json({message:`Se ah enviado un correo de verificacion a ${user.EMAIL}`,data:response.data})
-        })
-        .catch(error=>{
-            res.status(500).json({ error: error.message });
-        });
-
-      } catch (error) {
-        next(error);
-      }
-};
-module.exports = {
-  getUsers,
-  sendRestoreEmail,
-  restorePassword
 };

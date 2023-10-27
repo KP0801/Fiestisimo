@@ -13,14 +13,14 @@ exports.authenticateUser = async (req, res) => {
   
       // Mensaje de error
       if (!user) {
-        return res.status(500).json({ error: 'Credenciales incorrectas' });
+        return res.status(500).json({ error: 'Correo o contraseña incorrecta. Intente de nuevo' });
       }
   
       // Compara la contraseña 
       const isPasswordValid = await bcrypt.compare(password, user.password);
   
       if (!isPasswordValid) {
-        return res.status(500).json({ error: 'Credenciales incorrectas' });
+        return res.status(500).json({ error: 'Contraseña incorrecta. Intente de nuevo' });
       }
   
       // Generacion del token con información del usuario
@@ -80,3 +80,5 @@ exports.authenticateUser = async (req, res) => {
       res.status(401).json({ error: 'Token inválido' });
     }
   };
+
+  
