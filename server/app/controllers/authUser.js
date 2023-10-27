@@ -76,7 +76,6 @@ exports.authenticateUser = async (req, res) => {
         role: user.role,
       });
     } catch (error) {
-      console.error('Error al decodificar el token:', error);
       res.status(401).json({ error: 'Token inválido' });
     }
   };
