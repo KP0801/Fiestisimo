@@ -11,7 +11,7 @@ import { AuthProvider } from "./context/AuthProvider";
 import RutaProtegidaUsuarios from "./layouts/RutaProtegidaUsuarios";
 import PaginaInicioUsuarios from "./pages/ProfilesUsers/PaginaInicioUsuarios";
 import { AuthProviderUsers } from "./context/AuthProviderUsers";
-
+import Products from "./Components/Products/Products";
 const App = () => {
   return (
     <BrowserRouter>
@@ -21,6 +21,7 @@ const App = () => {
             <Route path="/" element={<AuthLayouts />}>
               <Route index element={<PrincipalPage />} />
             </Route>
+            <Route path="Productos" element={<Products />} />
             <Route path="quienes-somos" element={<Description />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
