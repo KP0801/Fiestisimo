@@ -2,6 +2,7 @@
 
 const  ProductCard = (Product) =>{
     console.log(Product);
+    
   return (
     
     <div className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">

@@ -1,11 +1,11 @@
 
 import Navbar from "../Navbar"
 import ProductCard from "./ProductCard";
-import SideBarUusuarios from "../SideBarUusuarios"
 import { useState } from "react";
 import data from "../../data";
-import { v4 as uuidv4 } from 'uuid';
 import SideBarProducts from "./SideBarProducts";
+import { v4 as uuidv4 } from 'uuid';
+
 
  const Products = () => {
 
@@ -13,12 +13,12 @@ import SideBarProducts from "./SideBarProducts";
 
     function getListProducts() {
 
-       return ListProducts.map( Product => {
+   return ListProducts.map( Product => {
 
-        return <ProductCard key={uuidv4()} Product={Product} /> 
+         return <ProductCard key={uuidv4} Product={Product} /> 
 
        } )
-    }
+}
 
   return (
    <>
