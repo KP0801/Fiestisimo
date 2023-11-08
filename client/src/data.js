@@ -37,6 +37,38 @@ const data  =[
         },
     
 
+        
+       
+    {
+        img:"/assets/PastelFrio.jpg",
+        nombre:"Pastel Frio",
+        productoid:"PastelFrio" ,
+        precio:"500" , 
+        descripcion:"Pastel Frio" ,
+        categoria:"Pastel" ,
+        },
+
+        
+       
+    {
+        img:"/assets/PastelFrio.jpg",
+        nombre:"Pastel Frio",
+        productoid:"PastelFrio" ,
+        precio:"500" , 
+        descripcion:"Pastel Frio" ,
+        categoria:"Pastel" ,
+        },
+
+        
+       
+    {
+        img:"/assets/PastelFrio.jpg",
+        nombre:"Pastel Frio",
+        productoid:"PastelFrio" ,
+        precio:"500" , 
+        descripcion:"Pastel Frio" ,
+        categoria:"Pastel" ,
+        },
 
 ]
 
