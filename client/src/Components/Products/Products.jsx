@@ -4,21 +4,13 @@ import ProductCard from "./ProductCard";
 import { useState } from "react";
 import data from "../../data";
 import SideBarProducts from "./SideBarProducts";
-import { v4 as uuidv4 } from 'uuid';
+
 
 
  const Products = () => {
 
-    const [ListProducts,setListProducts] = useState(data);
+     
 
-    function getListProducts() {
-
-   return ListProducts.map( Product => {
-
-         return <ProductCard key={uuidv4} Product={Product} /> 
-
-       } )
-}
 
   return (
    <>
