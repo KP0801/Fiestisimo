@@ -15,7 +15,7 @@ const RutaProtegida = () => {
           <div className="md:flex md:min-h-screen">
             <SideBar />
 
-            <main className="flex-1 p-10">
+            <main className="flex-1 p-10 h-screen hover:overflow-y-scroll">
               {/* flex-1 hace que tome el resto del contenido de la pantalla */}
               <Outlet />
             </main>

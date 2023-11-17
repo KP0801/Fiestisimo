@@ -1,4 +1,4 @@
-import { BsFillCartFill } from "react-icons/bs";
+import { MdFavoriteBorder } from "react-icons/md";
 import useAuth from "../../hooks/useAuth";
 import { AiFillDelete } from "react-icons/ai";
 import { AiFillEdit } from "react-icons/ai";
@@ -111,12 +111,10 @@ const CardPoductos = ({ prod, setProductos, productos, setCheck, check }) => {
             </>
           ) : (
             <>
-              <div className="flex justify-around pb-5 items-center">
-                <p className="text-black font-semibold text-xl mt-3">
+              <div className="pb-5">
+                <p className="text-black font-semibold text-xl mt-3 flex justify-between items-center">
                   L. {prod.price}
-                </p>
-                <p>
-                  <BsFillCartFill size={20} />
+                  <MdFavoriteBorder size={25} color="red" />
                 </p>
               </div>
             </>

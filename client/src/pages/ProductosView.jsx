@@ -52,7 +52,7 @@ const ProductosView = () => {
 
   return (
     <>
-      <div className="w-full h-auto grid grid-cols-4 gap-5 cursor-pointer">
+      <div className="w-full grid grid-cols-4 gap-5 h-auto">
         {currentProduct.map((prod) => (
           <div key={prod.id_product} className="col-span-1 mt-5">
             <CardPoductos
