@@ -1,6 +1,7 @@
 const data  =[
    
     {
+        id:1,
     img:"/assets/PastelFrio.jpg",
     nombre:"Pastel Especial",
     productoid:"Pastel Especial" ,
@@ -10,6 +11,7 @@ const data  =[
     },
        
     {
+        id:2,
         img:"/assets/PastelFrio.jpg",
         nombre:"Pastel Frio",
         productoid:"PastelFrio" ,
@@ -19,6 +21,7 @@ const data  =[
         },
            
     {
+        id:3,
         img:"/assets/PastelFrio.jpg",
         nombre:"Pastel Tradicional",
         productoid:"PastelTradicional" ,
@@ -28,6 +31,7 @@ const data  =[
         },
            
     {
+        id:4,
         img:"/assets/PastelFrio.jpg",
         nombre:"Postres",
         productoid:"Postres" ,
@@ -40,6 +44,7 @@ const data  =[
         
        
     {
+        id:5,
         img:"/assets/PastelFrio.jpg",
         nombre:"Pastel Frio",
         productoid:"PastelFrio" ,
@@ -51,6 +56,7 @@ const data  =[
         
        
     {
+        id:6,
         img:"/assets/PastelFrio.jpg",
         nombre:"Pastel Frio",
         productoid:"PastelFrio" ,
@@ -62,6 +68,7 @@ const data  =[
         
        
     {
+        id:7,
         img:"/assets/PastelFrio.jpg",
         nombre:"Pastel Frio",
         productoid:"PastelFrio" ,
@@ -69,6 +76,33 @@ const data  =[
         descripcion:"Pastel Frio" ,
         categoria:"Pastel" ,
         },
+        {
+            id:8,
+            img:"/assets/PastelFrio.jpg",
+            nombre:"Pastel Frio",
+            productoid:"PastelFrio" ,
+            precio:"500" , 
+            descripcion:"Pastel Frio" ,
+            categoria:"Pastel" ,
+            },
+            {
+                id:9,
+                img:"/assets/PastelFrio.jpg",
+                nombre:"Pastel Frio",
+                productoid:"PastelFrio" ,
+                precio:"500" , 
+                descripcion:"Pastel Frio" ,
+                categoria:"Pastel" ,
+                },
+                {
+                    id:10,
+                    img:"/assets/PastelFrio.jpg",
+                    nombre:"Pastel Frio",
+                    productoid:"PastelFrio" ,
+                    precio:"500" , 
+                    descripcion:"Pastel Frio" ,
+                    categoria:"Pastel" ,
+                    },
 
 ]
 

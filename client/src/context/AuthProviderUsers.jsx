@@ -40,12 +40,17 @@ const AuthProviderUsers = ({ children }) => {
     autenticarUsers();
   }, [authUsers.role === "cliente"]);
 
+  const cerrarSesionUsers = () => {
+    setAuthUsers({});
+  };
+
   return (
     <AuthContextUsers.Provider
       value={{
         authUsers,
         setAuthUsers,
         loading,
+        cerrarSesionUsers,
       }}
     >
       {children}

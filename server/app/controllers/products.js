@@ -4,7 +4,10 @@ const Product = require('../models/products');
 exports.createProduct = async (req, res) => {
   try {
     const { name, description, price, category } = req.body;
-    const imagePath = req.file.path;
+    const ext = req.file.originalname.split('.').pop();
+    
+    // Construye la ruta completa de la imagen
+    const imagePath = `http://localhost:3000/images/file-${name.replace(/\s+/g, '_')}.${ext}`;
 
     // Verifica si el producto existe 
     const existingProduct = await Product.findOne({ where: { name } });
@@ -22,7 +25,7 @@ exports.createProduct = async (req, res) => {
       category,
     });
 
-    res.status(201).json({message:"Producto registrado exitosamente", newProduct});
+    res.status(201).json({ message: "Producto registrado exitosamente", newProduct });
   } catch (error) {
     console.error('Error al registrar el producto:', error);
     res.status(500).json({ error: 'Error interno del servidor' });
@@ -71,7 +74,10 @@ exports.getProductById = async (req, res) => {
 exports.editProduct = async (req, res) => {
   try {
     const { id } = req.params; 
+    console.log(id);
+    console.log(req.params);
     const { name, description, price, category } = req.body;
+    console.log(req.body);
 
     // Verifica si el ID y al menos uno de los campos a editar están definidos
     if (!id) {

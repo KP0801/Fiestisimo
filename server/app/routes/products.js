@@ -10,7 +10,7 @@ const {createProduct, getProductsByCategory,
 router.post('/', tokenVerifyAdmin, upload.single('image'), createProduct); //Agrega productos
 router.get('/category/:category', authToken, getProductsByCategory); //Obtiene productos por categoria
 router.get('/:id', authToken, getProductById); //Obtiene productos especificos
-router.put('/:id', tokenVerifyAdmin, editProduct); //Edita productos
+router.put('/edit/:id', tokenVerifyAdmin, editProduct); //Edita productos
 router.delete('/:id', tokenVerifyAdmin, deleteProduct); //Elimina productos
 router.get('/cheap/products', authToken, getLowestPriceProducts); //Obtiene los productos con el precio mas bajo
 

@@ -1,4 +1,5 @@
 import { Outlet, Navigate } from "react-router-dom";
+import Footer from "../Components/Footer";
 import HeaderUsers from "../Components/HeaderUsers";
 import SideBarUusuarios from "../Components/SideBarUusuarios";
 import Spinner from "../Components/Spinner";
@@ -20,6 +21,7 @@ const RutaProtegidaUsuarios = () => {
               <Outlet />
             </main>
           </div>
+          <Footer />
         </div>
       ) : (
         <Navigate to="/login" />

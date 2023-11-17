@@ -40,12 +40,17 @@ const AuthProvider = ({ children }) => {
     autenticarAdmnin();
   }, [authAdm.role === "admin"]);
 
+  const cerrarSesion = () => {
+    setAuthAdm({});
+  };
+
   return (
     <AuthContext.Provider
       value={{
         setAuthAdm,
         authAdm,
         cargando,
+        cerrarSesion,
       }}
     >
       {children}
