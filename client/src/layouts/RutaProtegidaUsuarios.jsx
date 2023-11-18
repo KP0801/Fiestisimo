@@ -12,7 +12,7 @@ const RutaProtegidaUsuarios = () => {
   return (
     <>
       {authUsers.role === "cliente" ? (
-        <div className="bg-gray-100">
+        <div className="bg-white">
           <HeaderUsers />
           <div className="md:flex md:min-h-screen">
             <SideBarUusuarios />

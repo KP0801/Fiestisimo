@@ -43,7 +43,7 @@ const SideBar = () => {
           location.pathname === "/InicioAdm/AddUsuario" ? "bg-sky-100" : ""
         }`}
       >
-        Cambiar Usuario
+        Usuarios
         <MdOutlineAssignmentInd size={25} />
       </Link>
     </aside>

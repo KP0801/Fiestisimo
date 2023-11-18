@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import CardPoductos from "../Components/Productos/CardPoductos";
+import Spinner from "../Components/Spinner";
+import useAuth from "../hooks/useAuth";
 const ProductosView = () => {
   const [productos, setProductos] = useState([]);
   const [check, setCheck] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(8);
+  const { cargando } = useAuth();
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -27,18 +30,17 @@ const ProductosView = () => {
 
   useEffect(() => {
     const getProductos = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
       try {
-        const token = localStorage.getItem("token");
-        if (!token) return;
-
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-
         const { data } = await axios(
-          "http://localhost:3000/fiestisimo/products/cheap/products",
+          "http://localhost:3000/fiestisimo/products/all/products",
           config
         );
         console.log("data de productos", data);
@@ -49,6 +51,13 @@ const ProductosView = () => {
     };
     getProductos();
   }, [check]);
+
+  if (cargando)
+    return (
+      <>
+        <Spinner />
+      </>
+    );
 
   return (
     <>
@@ -65,7 +74,7 @@ const ProductosView = () => {
           </div>
         ))}
       </div>
-      <div className="flex flex-col mt-10">
+      <div className="flex flex-col mt-10 pb-10">
         {/* ... */}
         <div className="flex justify-center mt-4">
           {pageNumbers.map((number) => (
