@@ -32,6 +32,23 @@ exports.createProduct = async (req, res) => {
   }
 };
 
+//! Controlador para obtener todos los productos sin importar la categoría
+exports.getAllProducts = async (req, res) => {
+  try {
+    // Obtiene todos los productos
+    const products = await Product.findAll();
+
+    if (products.length === 0) {
+      return res.status(404).json({ message: 'No se encontraron productos.' });
+    }
+
+    res.status(200).json({ products });
+  } catch (error) {
+    console.error('Error al obtener todos los productos:', error);
+    res.status(500).json({ error: 'Parece haber un problema al obtener todos los productos.' });
+  }
+};
+
 //! Controlador para obtener todos los productos por categoría
 exports.getProductsByCategory = async (req, res) => {
   try {

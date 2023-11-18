@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const User = require('../models/customers');
+const UserHistory = require('../models/userHistory')
 const jwtUtils = require('../../utils/authToken');
 const jwt = require('jsonwebtoken');
 
@@ -16,13 +17,27 @@ exports.authenticateUser = async (req, res) => {
         return res.status(500).json({ error: 'Correo o contraseña incorrecta. Intente de nuevo' });
       }
   
-      // Compara la contraseña 
+      // Compara la contraseña
       const isPasswordValid = await bcrypt.compare(password, user.password);
-  
+
       if (!isPasswordValid) {
         return res.status(500).json({ error: 'Contraseña incorrecta. Intente de nuevo' });
       }
   
+      // Verifica si el usuario está desactivado
+      const userHistory = await UserHistory.findOne({
+        where: { id_user: user.id_user },
+        order: [['createdAt', 'DESC']],
+      });
+
+      // Verifica si existe un registro
+      const isDeactivated = userHistory ? !userHistory.active : false;
+
+      // Verifica si el usuario está desactivado
+      if (isDeactivated) {
+        return res.status(401).json({ error: 'Usuario inactivo. Contacte al administrador.' });
+      }
+
       // Generacion del token con información del usuario
       const payload = {
         userId: user.id_user,
