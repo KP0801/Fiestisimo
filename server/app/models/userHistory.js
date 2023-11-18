@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 const connection = require('../../config/database');
-const User = require('../models/customers');
 
 const UserHistory = connection.define('UserHistory', {
   id: {
@@ -16,8 +15,6 @@ const UserHistory = connection.define('UserHistory', {
     type: DataTypes.BOOLEAN,
   },
 });
-
-UserHistory.belongsTo(User, { foreignKey: 'id_user' });
 
 UserHistory.sync({ force: false })
   .then(() => {

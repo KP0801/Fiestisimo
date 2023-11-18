@@ -4,7 +4,7 @@ const upload = require('../middlewares/upload');
 const {authToken, tokenVerifyAdmin} = require('../middlewares/authToken');
 const {createProduct, getProductsByCategory, 
     editProduct, deleteProduct, 
-    getProductById, getLowestPriceProducts} = require('../controllers/products'); 
+    getProductById, getLowestPriceProducts, getAllProducts} = require('../controllers/products'); 
 
 // Rutas para productos
 router.post('/', tokenVerifyAdmin, upload.single('image'), createProduct); //Agrega productos
@@ -13,5 +13,5 @@ router.get('/:id', authToken, getProductById); //Obtiene productos especificos
 router.put('/edit/:id', tokenVerifyAdmin, editProduct); //Edita productos
 router.delete('/:id', tokenVerifyAdmin, deleteProduct); //Elimina productos
 router.get('/cheap/products', authToken, getLowestPriceProducts); //Obtiene los productos con el precio mas bajo
-
+router.get('/all/products', getAllProducts)
 module.exports = router;

@@ -1,11 +1,19 @@
 const User = require('../models/customers');
 const UserHistory = require('../models/userHistory');
+const { setupAssociations } = require('../models/associations');
+
+// Llama a setupAssociations para configurar las asociaciones
+setupAssociations();
 
 //! Controlador que obtiene todos los usuarios registrados 
 exports.getAllUsers = async (req, res) => {
     try {
       // Obtiene todos los usuarios
-      const users = await User.findAll();
+      const users = await User.findAll({
+        attributes: {
+          exclude: ['password', 'createdAt', 'updatedAt']
+        }
+      });
   
       if (users.length === 0) {
         return res.status(404).json({ message: 'No se encontraron usuarios.' });
@@ -24,8 +32,12 @@ exports.getUsersById = async (req, res) => {
       const { id } = req.params;
   
       // Busca el usuario por su ID
-      const user = await User.findByPk(id);
-  
+      const user = await User.findByPk(id, {
+        attributes: {
+          exclude: ['password', 'createdAt', 'updatedAt']
+        }
+      });
+
       if (!user) {
         return res.status(404).json({ message: 'No se encontró el usuario con el ID especificado.' });
       }
@@ -100,4 +112,33 @@ exports.getUsersById = async (req, res) => {
     console.error('Error al actualizar el rol del usuario:', error);
     return res.status(500).json({ error: 'Error interno del servidor' });
   }
+  };
+
+  //! Controlador que obtiene usuarios desactivados
+  exports.getInactiveUsers = async (req, res) => {
+    try {
+      // Busca los usuarios inactivos en UserHistory
+      const inactiveUsers = await User.findAll({
+        include: [
+          {
+            model: UserHistory,
+            attributes: [],
+            where: { active: false },
+            required: true,
+          },
+        ],
+        attributes: {
+          exclude: ['password', 'createdAt', 'updatedAt'],
+        },
+      });
+  
+      if (inactiveUsers.length === 0) {
+        return res.status(404).json({ message: 'No se encontraron usuarios inactivos.' });
+      }
+  
+      res.status(200).json({ inactiveUsers });
+    } catch (error) {
+      console.error('Error al obtener usuarios inactivos:', error);
+      res.status(500).json({ error: 'Error interno del servidor' });
+    }
   };
