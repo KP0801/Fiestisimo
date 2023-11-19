@@ -21,6 +21,7 @@ const AddUsuario = () => {
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
   useEffect(() => {
     const getUsers = async () => {
       const token = localStorage.getItem("token");

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
+import Alerta from "../Alerta";
 const ViewUser = ({ user, setCheck, check }) => {
   const [btn1, setBtn1] = useState(false);
   const [btn2, setBtn2] = useState(false);
+  const [alerta, setAlerta] = useState({});
 
   const removeAccount = async (id) => {
     const token = localStorage.getItem("token");
-    console.log("Token funcion 1:", token);
-    console.log("idfuncio1", id);
     if (!token) return;
 
     const config = {
@@ -23,15 +23,20 @@ const ViewUser = ({ user, setCheck, check }) => {
       console.log(data);
       setBtn1(true);
       setCheck(!check);
+      setAlerta({
+        msg: data.message,
+        error: false,
+      });
     } catch (error) {
-      console.log(error);
+      setAlerta({
+        msg: error.response.data.message,
+        error: true,
+      });
     }
   };
 
   const newAdmin = async (id) => {
     const token = localStorage.getItem("token");
-    console.log("token funcion 2:", token);
-    console.log("idfuncio2", id);
     if (!token) return;
 
     const config = {
@@ -47,13 +52,23 @@ const ViewUser = ({ user, setCheck, check }) => {
       console.log(data);
       setBtn2(true);
       setCheck(!check);
+      setAlerta({
+        msg: data.message,
+        error: false,
+      });
     } catch (error) {
-      console.log(error);
+      setAlerta({
+        msg: error.response.data.message,
+        error: true,
+      });
     }
   };
 
+  const { msg } = alerta;
+
   return (
     <div className="p-3">
+      {msg && <Alerta alerta={alerta} />}
       <img
         src="/assets/Perfil.jpg"
         alt={`Perfil${user.name}`}

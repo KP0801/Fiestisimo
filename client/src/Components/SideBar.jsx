@@ -3,7 +3,8 @@ import useAuth from "../hooks/useAuth";
 import { useLocation } from "react-router-dom";
 import { AiOutlineFileAdd, AiOutlineHome } from "react-icons/ai";
 import { MdOutlineAssignmentInd } from "react-icons/md";
-import { GoCreditCard } from "react-icons/go";
+import { IoFastFood } from "react-icons/io5";
+import { FaUserXmark } from "react-icons/fa6";
 
 const SideBar = () => {
   const { authAdm } = useAuth();
@@ -26,7 +27,7 @@ const SideBar = () => {
         }`}
       >
         Productos
-        <GoCreditCard size={25} />
+        <IoFastFood size={25} />
       </Link>
       <Link
         to="AddProducts"
@@ -45,6 +46,17 @@ const SideBar = () => {
       >
         Usuarios
         <MdOutlineAssignmentInd size={25} />
+      </Link>
+      <Link
+        to="DesactiveUsuario"
+        className={`w-4/5 text-blue-800 border border-sky-400 uppercase font-bold flex items-center justify-around mt-5 rounded-lg py-2 ${
+          location.pathname === "/InicioAdm/DesactiveUsuario"
+            ? "bg-sky-100"
+            : ""
+        }`}
+      >
+        Desactivados
+        <FaUserXmark size={25} />
       </Link>
     </aside>
   );

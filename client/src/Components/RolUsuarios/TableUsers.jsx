@@ -78,7 +78,9 @@ const TableUsers = ({ check, setCheck, currentUser }) => {
           </table>
         </div>
       ) : (
-        <p className="text-center">No hay usuarios</p>
+        <p className="text-center text-gray-800 text-4xl font-bold">
+          No hay usuarios
+        </p>
       )}
     </div>
   );

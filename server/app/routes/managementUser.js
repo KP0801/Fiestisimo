@@ -6,8 +6,8 @@ const {authToken, tokenVerifyAdmin} = require('../middlewares/authToken');
 // Rutas para gestion de usuarios
 router.get('/', tokenVerifyAdmin,getAllUsers);
 router.get('/user/:id', tokenVerifyAdmin,getUsersById);
-router.post('/:userId', tokenVerifyAdmin,createUserHistoryRecord);
+router.post('/:userId',createUserHistoryRecord);
 router.get('/inactiveUsers', tokenVerifyAdmin,getInactiveUsers)
-router.put('/:userId', tokenVerifyAdmin,updateUserRole);
+router.put('/:userId', updateUserRole);
 
 module.exports = router;
