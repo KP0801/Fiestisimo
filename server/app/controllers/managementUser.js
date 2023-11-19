@@ -1,30 +1,39 @@
 const User = require('../models/customers');
 const UserHistory = require('../models/userHistory');
 const { setupAssociations } = require('../models/associations');
+const { Op } = require('sequelize');
 
 // Llama a setupAssociations para configurar las asociaciones
 setupAssociations();
 
 //! Controlador que obtiene todos los usuarios registrados 
 exports.getAllUsers = async (req, res) => {
-    try {
-      // Obtiene todos los usuarios
-      const users = await User.findAll({
-        attributes: {
-          exclude: ['password', 'createdAt', 'updatedAt']
+  try {
+    // Obtiene el id del usuario en sesión
+    const userIdInSession = req.token.userId;
+
+    // Obtiene todos los usuarios excluyendo al usuario en sesión
+    const users = await User.findAll({
+      attributes: {
+        exclude: ['password', 'createdAt', 'updatedAt']
+      },
+      where: {
+        id_user: {
+          [Op.ne]: userIdInSession 
         }
-      });
-  
-      if (users.length === 0) {
-        return res.status(404).json({ message: 'No se encontraron usuarios.' });
       }
-  
-      res.status(200).json({ users });
-    } catch (error) {
-      console.error('Error al obtener todos los usuarios:', error);
-      res.status(500).json({ error: 'Parece haber un problema al obtener todos los usuarios.' });
+    });
+
+    if (users.length === 0) {
+      return res.status(404).json({ message: 'No se encontraron usuarios, excluyendo al usuario en sesión.' });
     }
-  };
+
+    res.status(200).json({ users });
+  } catch (error) {
+    console.error('Error al obtener todos los usuarios:', error);
+    res.status(500).json({ error: 'Parece haber un problema al obtener todos los usuarios.' });
+  }
+};
 
   //! Controlador para obtener detalles de un usuario por ID
 exports.getUsersById = async (req, res) => {
