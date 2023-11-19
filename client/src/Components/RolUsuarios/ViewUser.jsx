@@ -6,6 +6,8 @@ const ViewUser = ({ user, setCheck, check }) => {
 
   const removeAccount = async (id) => {
     const token = localStorage.getItem("token");
+    console.log("Token funcion 1:", token);
+    console.log("idfuncio1", id);
     if (!token) return;
 
     const config = {
@@ -14,7 +16,7 @@ const ViewUser = ({ user, setCheck, check }) => {
       },
     };
     try {
-      const { data } = axios.post(
+      const { data } = await axios.post(
         `http://localhost:3000/fiestisimo/managementUser/${id}`,
         config
       );
@@ -28,6 +30,8 @@ const ViewUser = ({ user, setCheck, check }) => {
 
   const newAdmin = async (id) => {
     const token = localStorage.getItem("token");
+    console.log("token funcion 2:", token);
+    console.log("idfuncio2", id);
     if (!token) return;
 
     const config = {
@@ -36,7 +40,7 @@ const ViewUser = ({ user, setCheck, check }) => {
       },
     };
     try {
-      const { data } = axios.put(
+      const { data } = await axios.put(
         `http://localhost:3000/fiestisimo/managementUser/${id}`,
         config
       );

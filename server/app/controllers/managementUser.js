@@ -53,6 +53,7 @@ exports.getUsersById = async (req, res) => {
   exports.createUserHistoryRecord = async (req, res) => {
     try {
       const { userId } = req.params;
+      console.log(req.header);
   
       // Busca al usuario por su ID
       const user = await User.findByPk(userId);
