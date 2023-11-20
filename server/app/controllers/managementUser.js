@@ -24,11 +24,25 @@ exports.getAllUsers = async (req, res) => {
       }
     });
 
-    if (users.length === 0) {
-      return res.status(404).json({ message: 'No se encontraron usuarios, excluyendo al usuario en sesión.' });
+    // Filtra los usuarios para excluir aquellos con registros en UserHistory con active = false
+    const filteredUsers = await Promise.all(users.map(async (user) => {
+      const userHistoryRecord = await UserHistory.findOne({
+        where: {
+          id_user: user.id_user,
+          active: false
+        }
+      });
+      return userHistoryRecord ? null : user;
+    }));
+
+    // Filtra los usuarios nulos (aquellos que tienen un registro en UserHistory con active = false)
+    const finalUsers = filteredUsers.filter(user => user !== null);
+
+    if (finalUsers.length === 0) {
+      return res.status(404).json({ message: 'No se encontraron usuarios activos.' });
     }
 
-    res.status(200).json({ users });
+    res.status(200).json({ users: finalUsers });
   } catch (error) {
     console.error('Error al obtener todos los usuarios:', error);
     res.status(500).json({ error: 'Parece haber un problema al obtener todos los usuarios.' });
