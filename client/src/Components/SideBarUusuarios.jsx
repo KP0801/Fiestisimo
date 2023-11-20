@@ -11,15 +11,8 @@ const SideBarUusuarios = () => {
     <aside className="md:w-80 lg:w-96 px-5 py-10">
       {location.pathname === "/InicioUsers" ? (
         <>
-          <div className="w-full mt-10 justify-center items-center flex">
-            <img
-              src="/assets/Perfil.jpg"
-              alt="PerfilVacio"
-              className="w-40 h-40 rounded-full"
-            />
-          </div>
           <div className="flex justify-center mt-5">
-            <p className="text-base text-sky-700 font-bold">{authUsers.name}</p>
+            <p className="text-base text-sky-700 font-bold uppercase"><span className="text-lg text-sky-700 font-black">Bienvenido :</span>  {authUsers.name}</p>
           </div>
         </>
       ) : (

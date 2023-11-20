@@ -110,7 +110,10 @@ const FormAdmin = ({ editMode, prod, setCheck, check }) => {
       setCategory("");
       setImage(null);
     } catch (error) {
-      console.log(error);
+      setAlerta({
+        msg: error.response.data.error,
+        error: true,
+      });
     }
   };
 
