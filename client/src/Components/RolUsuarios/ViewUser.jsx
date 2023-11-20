@@ -1,10 +1,15 @@
 import { useState } from "react";
 import axios from "axios";
 import Alerta from "../Alerta";
+import { Howl } from "howler";
+
 const ViewUser = ({ user, setCheck, check }) => {
   const [btn1, setBtn1] = useState(false);
   const [btn2, setBtn2] = useState(false);
   const [alerta, setAlerta] = useState({});
+  const sound = new Howl({
+    src: ["/audio/notificacion.mp3"],
+  });
 
   const removeAccount = async (id) => {
     const token = localStorage.getItem("token");
@@ -27,6 +32,7 @@ const ViewUser = ({ user, setCheck, check }) => {
         msg: data.message,
         error: false,
       });
+      sound.play();
     } catch (error) {
       setAlerta({
         msg: error.response.data.message,
@@ -56,6 +62,7 @@ const ViewUser = ({ user, setCheck, check }) => {
         msg: data.message,
         error: false,
       });
+      sound.play();
     } catch (error) {
       setAlerta({
         msg: error.response.data.message,
@@ -65,6 +72,14 @@ const ViewUser = ({ user, setCheck, check }) => {
   };
 
   const { msg } = alerta;
+
+  const handleClickRemove = async (id) => {
+    await removeAccount(id);
+  };
+
+  const handleClickUp = async (id) => {
+    await newAdmin(id);
+  };
 
   return (
     <div className="p-3">
@@ -90,13 +105,13 @@ const ViewUser = ({ user, setCheck, check }) => {
       </div>
       <div className="mt-5 flex justify-around">
         <button
-          onClick={() => removeAccount(user.id_user)}
+          onClick={() => handleClickRemove(user.id_user)}
           className="p-3 bg-red-600 text-white font-bold text-base hover:bg-red-800 rounded-md"
         >
           {!btn1 ? "Desactivar Cuenta" : "Cuenta Desactivada"}
         </button>
         <button
-          onClick={() => newAdmin(user.id_user)}
+          onClick={() => handleClickUp(user.id_user)}
           className="p-3 bg-sky-600 text-white font-bold text-base hover:bg-sky-800 rounded-md"
         >
           {!btn2 ? "Hacer Administrador" : "Nuevo Administrador"}

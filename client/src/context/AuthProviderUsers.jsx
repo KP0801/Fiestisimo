@@ -7,6 +7,7 @@ const AuthContextUsers = createContext();
 const AuthProviderUsers = ({ children }) => {
   const [authUsers, setAuthUsers] = useState({});
   const [loading, setLoading] = useState(true);
+  const [productosUser, setProductosUser] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,6 +45,21 @@ const AuthProviderUsers = ({ children }) => {
     setAuthUsers({});
   };
 
+  useEffect(() => {
+    const getProductos = async () => {
+      try {
+        const { data } = await axios(
+          "http://localhost:3000/fiestisimo/products/all/products"
+        );
+        console.log("PRODUCTOS DESDE EL PROVIDER DE USUARIOS", data.products);
+        setProductosUser(data.products);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProductos();
+  }, []);
+
   return (
     <AuthContextUsers.Provider
       value={{
@@ -51,6 +67,7 @@ const AuthProviderUsers = ({ children }) => {
         setAuthUsers,
         loading,
         cerrarSesionUsers,
+        productosUser,
       }}
     >
       {children}

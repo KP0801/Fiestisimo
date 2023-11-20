@@ -17,6 +17,7 @@ import ProdCategory from "./Components/Productos/ProdCategory";
 import ProductoId from "./Components/Productos/ProductoId";
 import ProductosView from "./pages/ProductosView";
 import DesactiveUsers from "./Components/RolUsuarios/desactiveUsers";
+import ResultsSearch from "./Components/RolUsuarios/ResultsSearch";
 const App = () => {
   return (
     <BrowserRouter>
@@ -41,6 +42,7 @@ const App = () => {
               <Route index element={<PaginaInicioUsuarios />} />
               <Route path="productos/:categoria" element={<ProdCategory />} />
               <Route path="productos/:categoria/:id" element={<ProductoId />} />
+              <Route path="search" element={<ResultsSearch />} />
             </Route>
           </Routes>
         </AuthProviderUsers>
