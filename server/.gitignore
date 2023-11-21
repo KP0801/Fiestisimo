@@ -1,5 +1,6 @@
 # Dependencias instaladas con npm
 node_modules/
+package-lock.json
 
 # Archivos de registro
 logs/
@@ -8,6 +9,7 @@ logs/
 # Archivos generados por el sistema
 *.swp
 .DS_Store
+.env
 
 
 
