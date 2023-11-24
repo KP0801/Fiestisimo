@@ -22,7 +22,9 @@ const ProdCategory = () => {
       };
       try {
         const { data } = await axios(
-          `http://localhost:3000/fiestisimo/products/category/${params.categoria}`,
+          `${import.meta.env.VITE_BACKEND_URL}/fiestisimo/products/category/${
+            params.categoria
+          }`,
           config
         );
         console.log("PROD POR CATE", data);

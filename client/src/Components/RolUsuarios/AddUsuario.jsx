@@ -34,7 +34,7 @@ const AddUsuario = () => {
       };
       try {
         const { data } = await axios(
-          "http://localhost:3000/fiestisimo/managementUser",
+          `${import.meta.env.VITE_BACKEND_URL}/fiestisimo/managementUser`,
           config
         );
         console.log("USUARIOS", data.users);

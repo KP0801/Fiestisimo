@@ -27,7 +27,7 @@ const AuthProviderUsers = ({ children }) => {
 
       try {
         const { data } = await axios(
-          "http://localhost:3000/fiestisimo/login/",
+          `${import.meta.env.VITE_BACKEND_URL}/fiestisimo/login/`,
           config
         );
         console.log("DATOS USUARIO", data);
@@ -49,7 +49,7 @@ const AuthProviderUsers = ({ children }) => {
     const getProductos = async () => {
       try {
         const { data } = await axios(
-          "http://localhost:3000/fiestisimo/products/all/products"
+          `${import.meta.env.VITE_BACKEND_URL}/fiestisimo/products/all/products`
         );
         console.log("PRODUCTOS DESDE EL PROVIDER DE USUARIOS", data.products);
         setProductosUser(data.products);

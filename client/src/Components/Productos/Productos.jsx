@@ -20,7 +20,9 @@ const Productos = () => {
         };
 
         const { data } = await axios(
-          "http://localhost:3000/fiestisimo/products/cheap/products",
+          `${
+            import.meta.env.VITE_BACKEND_URL
+          }/fiestisimo/products/cheap/products`,
           config
         );
         console.log("data de productos", data);

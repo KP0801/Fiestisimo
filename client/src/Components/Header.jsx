@@ -26,7 +26,7 @@ const Header = () => {
             type="button"
             className="text-white text-sm bg-sky-600 uppercase shadow-md hover:bg-sky-800 p-3 rounded-md font-bold"
           >
-            Cerrar Cesion
+            Cerrar Sesión
           </button>
         </div>
       </div>

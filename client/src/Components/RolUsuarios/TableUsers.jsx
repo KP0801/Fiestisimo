@@ -18,7 +18,9 @@ const TableUsers = ({ check, setCheck, currentUser }) => {
 
     try {
       const { data } = await axios(
-        `http://localhost:3000/fiestisimo/managementUser/user/${id}`,
+        `${
+          import.meta.env.VITE_BACKEND_URL
+        }/fiestisimo/managementUser/user/${id}`,
         config
       );
       console.log("USUARIOS", data.user);

@@ -25,7 +25,9 @@ const ProductoId = () => {
 
       try {
         const { data } = await axios(
-          `http://localhost:3000/fiestisimo/products/${params.id}`,
+          `${import.meta.env.VITE_BACKEND_URL}/fiestisimo/products/${
+            params.id
+          }`,
           config
         );
         console.log("PROD POR ID", data.product);

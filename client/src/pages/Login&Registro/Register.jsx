@@ -88,7 +88,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/fiestisimo/registerUser/",
+        `${import.meta.env.VITE_BACKEND_URL}/fiestisimo/registerUser/`,
         {
           name,
           email,

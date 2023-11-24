@@ -1,6 +1,9 @@
 import { dataSocialNetwork } from "../helpers/dataSocialNetwork";
 import { Link } from "react-router-dom";
+import GlobalCardProd from "../Components/GlobalCardProd";
+import useAuthUsers from "../hooks/useAuthUsers";
 const FirstView = () => {
+  const { productosUser } = useAuthUsers();
   return (
     <>
       <div
@@ -52,6 +55,16 @@ const FirstView = () => {
               height="700"
             />
           </div>
+        </div>
+      </div>
+      <div className="mt-10 text-center">
+        <p className="text-4xl text-yellow-600 font-semibold">Te ofrecemos </p>
+        <div className="w-full grid grid-cols-4 gap-5 cursor-pointer">
+          {productosUser.slice(0, 8).map((prod) => (
+            <div key={prod.id_product} className="col-span-1 mt-5">
+              <GlobalCardProd key={prod.id_product} prod={prod} />
+            </div>
+          ))}
         </div>
       </div>
       <div className="mt-10 text-center">

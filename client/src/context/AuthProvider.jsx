@@ -26,7 +26,7 @@ const AuthProvider = ({ children }) => {
 
       try {
         const { data } = await axios(
-          "http://localhost:3000/fiestisimo/login/",
+          `${import.meta.env.VITE_BACKEND_URL}/fiestisimo/login/`,
           config
         );
         console.log("DATOS USUARIO", data);

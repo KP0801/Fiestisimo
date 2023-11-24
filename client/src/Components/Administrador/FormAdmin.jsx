@@ -94,7 +94,7 @@ const FormAdmin = ({ editMode, prod, setCheck, check }) => {
       formData.append("image", image);
 
       const { data } = await axios.post(
-        "http://localhost:3000/fiestisimo/products/",
+        `${import.meta.env.VITE_BACKEND_URL}/fiestisimo/products/`,
         formData,
         config
       );
@@ -188,7 +188,7 @@ const FormAdmin = ({ editMode, prod, setCheck, check }) => {
         },
       };
       const { data } = await axios.put(
-        `http://localhost:3000/fiestisimo/products/edit/${ide}`,
+        `${import.meta.env.VITE_BACKEND_URL}/fiestisimo/products/edit/${ide}`,
         { name, description, price, category },
         config
       );

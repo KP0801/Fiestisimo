@@ -22,7 +22,7 @@ const ViewUser = ({ user, setCheck, check }) => {
     };
     try {
       const { data } = await axios.post(
-        `http://localhost:3000/fiestisimo/managementUser/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/fiestisimo/managementUser/${id}`,
         config
       );
       console.log(data);
@@ -52,7 +52,7 @@ const ViewUser = ({ user, setCheck, check }) => {
     };
     try {
       const { data } = await axios.put(
-        `http://localhost:3000/fiestisimo/managementUser/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/fiestisimo/managementUser/${id}`,
         config
       );
       console.log(data);

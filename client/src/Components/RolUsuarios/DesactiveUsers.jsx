@@ -33,7 +33,9 @@ const DesactiveUsers = () => {
 
       try {
         const { data } = await axios(
-          "http://localhost:3000/fiestisimo/managementUser/inactiveUsers",
+          `${
+            import.meta.env.VITE_BACKEND_URL
+          }/fiestisimo/managementUser/inactiveUsers`,
           config
         );
         console.log(data);

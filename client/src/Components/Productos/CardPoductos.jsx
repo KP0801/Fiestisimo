@@ -25,7 +25,7 @@ const CardPoductos = ({ prod, setProductos, productos, setCheck, check }) => {
         },
       };
       const { data } = await axios.delete(
-        `http://localhost:3000/fiestisimo/products/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/fiestisimo/products/${id}`,
         config
       );
       console.log(data.message);

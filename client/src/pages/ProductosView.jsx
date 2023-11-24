@@ -40,7 +40,9 @@ const ProductosView = () => {
       };
       try {
         const { data } = await axios(
-          "http://localhost:3000/fiestisimo/products/all/products",
+          `${
+            import.meta.env.VITE_BACKEND_URL
+          }/fiestisimo/products/all/products`,
           config
         );
         console.log("data de productos", data);

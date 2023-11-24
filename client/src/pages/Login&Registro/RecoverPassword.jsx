@@ -48,10 +48,13 @@ const RecoverPassword = () => {
     }
 
     try {
-      const response = axios.put("http://localhost:3000/fiestisimo/login/", {
-        email,
-        newPassword,
-      });
+      const response = axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/fiestisimo/login/`,
+        {
+          email,
+          newPassword,
+        }
+      );
       console.log(response);
       toast.success("Contraseña restablecida Exitosamente", {
         position: "top-right",
