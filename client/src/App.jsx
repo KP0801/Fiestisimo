@@ -16,7 +16,7 @@ import AddUsuario from "./Components/RolUsuarios/AddUsuario";
 import ProdCategory from "./Components/Productos/ProdCategory";
 import ProductoId from "./Components/Productos/ProductoId";
 import ProductosView from "./pages/ProductosView";
-import DesactiveUsers from "./Components/RolUsuarios/desactiveUsers";
+import DesactiveUsers from "./Components/RolUsuarios/DesactiveUsers";
 import ResultsSearch from "./Components/RolUsuarios/ResultsSearch";
 const App = () => {
   return (
