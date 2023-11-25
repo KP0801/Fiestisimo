@@ -1,15 +1,17 @@
 import Navbar from "../Components/Navbar";
-import { Outlet } from "react-router-dom";
+import PrincipalPage from "../pages/PrincipalPage";
 
 const AuthLayouts = () => {
   return (
-    <main className="px-3 lg:px-10">
-      <Navbar />
-      <hr />
-      <div className="container mx-10">
-        <Outlet />
-      </div>
-    </main>
+    <>
+      <main className="px-3 lg:px-10">
+        <Navbar />
+        <hr />
+        <div className="container mx-10 mt-32">
+          <PrincipalPage />
+        </div>
+      </main>
+    </>
   );
 };
 

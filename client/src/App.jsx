@@ -4,7 +4,6 @@ import Login from "./pages/Login&Registro/Login";
 import RecoverPassword from "./pages/Login&Registro/RecoverPassword";
 import Register from "./pages/Login&Registro/Register";
 import AuthLayouts from "./layouts/AuthLayouts";
-import PrincipalPage from "./pages/PrincipalPage";
 import RutaProtegida from "./layouts/RutaProtegida";
 import PaginaInicio from "./pages/PaginaInicio";
 import { AuthProvider } from "./context/AuthProvider";
@@ -24,9 +23,7 @@ const App = () => {
       <AuthProvider>
         <AuthProviderUsers>
           <Routes>
-            <Route path="/" element={<AuthLayouts />}>
-              <Route index element={<PrincipalPage />} />
-            </Route>
+            <Route path="/" element={<AuthLayouts />} />
             <Route path="quienes-somos" element={<Description />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
