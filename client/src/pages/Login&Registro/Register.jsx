@@ -115,7 +115,10 @@ const Register = () => {
         navigate("/login");
       }, 5000);
     } catch (error) {
-      console.log(error);
+      setAlerta({
+        msg: error.response.data.error,
+        error: true,
+      });
     }
   };
 
